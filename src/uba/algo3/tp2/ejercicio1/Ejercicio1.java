@@ -13,6 +13,22 @@ public class Ejercicio1 {
 	private String fileName;
 	private List<Pavilion> pavilions;
 	
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public List<Pavilion> getPavilions() {
+		return pavilions;
+	}
+
+	public void setPavilions(List<Pavilion> pavilions) {
+		this.pavilions = pavilions;
+	}
+	
 	public Ejercicio1(String fileName) throws IOException {
 		
 		this.fileName = fileName;
@@ -23,7 +39,7 @@ public class Ejercicio1 {
 		String line;
 		
 		while((line = is.readLine()) != null) {
-			Integer floors = Integer.getInteger(line)+1; 
+			Integer floors = Integer.getInteger(line); 
 			line = is.readLine();
 			Pavilion pavilion = new Pavilion(floors, line);
 			pavilions.add(pavilion);
@@ -31,7 +47,7 @@ public class Ejercicio1 {
 		
 		is.close();
 	};
-	
+
 	public String run(Integer idxPavilion)
 	{
 		Pavilion pavilion = pavilions.get(idxPavilion);

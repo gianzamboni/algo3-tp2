@@ -43,5 +43,35 @@ public class Node {
 		this.adjacencyNodes.add(nodeId);
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+	    result.append("Node[ ");
+	    result.append("Id=" + this.id + "; ");
+	    result.append("AdyacencyNode=" + this.adjacencyNodes + "; ");
+	    result.append("MaxDistanceToLowLevel=" + this.maxDistanceToLowLevel + " ");
+	    result.append("]");
+
+	    return result.toString();
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if(other == null){
+			return false;
+		} 
+		else if(other == this){
+			return true;
+		} 
+		else if (!(other instanceof Node)) {
+			return false;
+		}
+		
+		Node otherNode = (Node) other;
+		return this.id.equals(otherNode.getId()) 
+				&& this.adjacencyNodes.equals(otherNode.getAdjacencyNodes()) 
+				&& this.maxDistanceToLowLevel.equals(otherNode.getMaxDistanceToLowLevel()); 
+		
+	}
 	
 }

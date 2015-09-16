@@ -28,22 +28,25 @@ public class Pavilion {
 	
 	public Pavilion(Integer floors, String line) {
 		this.floors = floors;
-		Node[] nodes = new Node[floors];
-		LineParser.parseExercise1(line, nodes);
+		this.portals = new Node[floors+1];
+		LineParser.parseExercise1(line, this.portals);
 	}
 
 
 	public Integer getMaxDistanceToLastFloor() {
 		
-		for(int i = 0; i < floors; i++){
+		for(int i = 0; i <= floors; i++){
 			if(portals[i] != null){
 				for(Integer nodeId : portals[i].getAdjacencyNodes()){
-					portals[nodeId].setMaxDistanceToLowLevel(portals[i].getMaxDistanceToLowLevel() + 1);
+					Integer distance = portals[i].getMaxDistanceToLowLevel() + 1;
+					if(distance > portals[nodeId].getMaxDistanceToLowLevel()) {
+						portals[nodeId].setMaxDistanceToLowLevel(distance);
+					}
 				}	
 			}
 		}
 		
-		return portals[floors-1].getMaxDistanceToLowLevel();
+		return portals[floors].getMaxDistanceToLowLevel();
 		
 	}
 
