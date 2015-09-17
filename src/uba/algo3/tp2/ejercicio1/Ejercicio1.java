@@ -39,7 +39,7 @@ public class Ejercicio1 {
 		String line;
 		
 		while((line = is.readLine()) != null) {
-			Integer floors = Integer.getInteger(line); 
+			Integer floors = Integer.parseInt(line); 
 			line = is.readLine();
 			Pavilion pavilion = new Pavilion(floors, line);
 			pavilions.add(pavilion);

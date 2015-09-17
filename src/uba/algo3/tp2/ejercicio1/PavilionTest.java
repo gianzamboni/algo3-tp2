@@ -1,4 +1,4 @@
-package uba.algo3.tp2.ejercicio1.tests;
+package uba.algo3.tp2.ejercicio1;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import uba.algo3.tp2.ejercicio1.Node;
-import uba.algo3.tp2.ejercicio1.Pavilion;
 import uba.algo3.utils.LineParser;
 
 public class PavilionTest {

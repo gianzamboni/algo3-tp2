@@ -1,4 +1,4 @@
-package uba.algo3.tp2.ejercicio1.tests;
+package uba.algo3.tp2.ejercicio1;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import uba.algo3.tp2.ejercicio1.Ejercicio1;
 
 public class Ejercicio1Tests {
 	
