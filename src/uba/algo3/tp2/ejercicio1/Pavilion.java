@@ -5,7 +5,7 @@ import uba.algo3.utils.LineParser;
 public class Pavilion {
 	
 	private Integer floorNumber;
-	private Floor[] portals;
+	private Floor[] floors;
 	
 	public Integer getFloorNumber() {
 		return floorNumber;
@@ -18,35 +18,35 @@ public class Pavilion {
 
 
 	public Floor[] getFloors() {
-		return portals;
+		return floors;
 	}
 
 
 	public void setFloors(Floor[] portals) {
-		this.portals = portals;
+		this.floors = portals;
 	}
 	
 	public Pavilion(Integer floors, String line) {
 		this.floorNumber = floors;
-		this.portals = new Floor[floors+1];
-		LineParser.parseExercise1(line, this.portals);
+		this.floors = new Floor[floors+1];
+		LineParser.parseExercise1(line, this.floors);
 	}
 
 
 	public Integer getMaxDistanceToLastFloor() {
 		
 		for(int i = 0; i <= floorNumber; i++){
-			if(portals[i] != null){
-				for(Integer nodeId : portals[i].getAdjacencyNodes()){
-					Integer distance = portals[i].getMaxDistanceToLowLevel() + 1;
-					if(distance > portals[nodeId].getMaxDistanceToLowLevel()) {
-						portals[nodeId].setMaxDistanceToLowLevel(distance);
+			if(floors[i] != null){
+				for(Integer nodeId : floors[i].getAdjacencyNodes()){
+					Integer distance = floors[i].getMaxDistanceToLowLevel() + 1;
+					if(distance > floors[nodeId].getMaxDistanceToLowLevel()) {
+						floors[nodeId].setMaxDistanceToLowLevel(distance);
 					}
 				}	
 			}
 		}
 		
-		return portals[floorNumber].getMaxDistanceToLowLevel();
+		return floors[floorNumber].getMaxDistanceToLowLevel();
 		
 	}
 
