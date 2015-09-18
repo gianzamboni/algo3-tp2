@@ -3,13 +3,13 @@ package uba.algo3.tp2.ejercicio1;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Node {
+public class Floor {
 	
 	private Integer id;
 	private List<Integer> adjacencyNodes;
 	private Integer maxDistanceToLowLevel;
 	
-	public Node(Integer id){
+	public Floor(Integer id){
 		this.id = id;
 		this.adjacencyNodes = new LinkedList<Integer>();
 		this.maxDistanceToLowLevel = 0;
@@ -63,11 +63,11 @@ public class Node {
 		else if(other == this){
 			return true;
 		} 
-		else if (!(other instanceof Node)) {
+		else if (!(other instanceof Floor)) {
 			return false;
 		}
 		
-		Node otherNode = (Node) other;
+		Floor otherNode = (Floor) other;
 		return this.id.equals(otherNode.getId()) 
 				&& this.adjacencyNodes.equals(otherNode.getAdjacencyNodes()) 
 				&& this.maxDistanceToLowLevel.equals(otherNode.getMaxDistanceToLowLevel()); 

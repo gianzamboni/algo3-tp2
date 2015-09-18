@@ -4,38 +4,38 @@ import uba.algo3.utils.LineParser;
 
 public class Pavilion {
 	
-	private Integer floors;
-	private Node[] portals;
+	private Integer floorNumber;
+	private Floor[] portals;
 	
-	public Integer getFloors() {
-		return floors;
+	public Integer getFloorNumber() {
+		return floorNumber;
 	}
 
 
-	public void setFloors(Integer floors) {
-		this.floors = floors;
+	public void setFloorNumber(Integer floors) {
+		this.floorNumber = floors;
 	}
 
 
-	public Node[] getPortals() {
+	public Floor[] getFloors() {
 		return portals;
 	}
 
 
-	public void setPortals(Node[] portals) {
+	public void setFloors(Floor[] portals) {
 		this.portals = portals;
 	}
 	
 	public Pavilion(Integer floors, String line) {
-		this.floors = floors;
-		this.portals = new Node[floors+1];
+		this.floorNumber = floors;
+		this.portals = new Floor[floors+1];
 		LineParser.parseExercise1(line, this.portals);
 	}
 
 
 	public Integer getMaxDistanceToLastFloor() {
 		
-		for(int i = 0; i <= floors; i++){
+		for(int i = 0; i <= floorNumber; i++){
 			if(portals[i] != null){
 				for(Integer nodeId : portals[i].getAdjacencyNodes()){
 					Integer distance = portals[i].getMaxDistanceToLowLevel() + 1;
@@ -46,7 +46,7 @@ public class Pavilion {
 			}
 		}
 		
-		return portals[floors].getMaxDistanceToLowLevel();
+		return portals[floorNumber].getMaxDistanceToLowLevel();
 		
 	}
 
