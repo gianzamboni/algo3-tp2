@@ -13,14 +13,14 @@ public class Ejercicio2Test {
 	public void test() throws IOException {
 		Ejercicio2 ej = new Ejercicio2("Tp2Ej2");
 		Portal p1 = new Portal(0, 10, 10, 1);
-		Pavilion pab1 = new Pavilion(10, 10);
+		Pavilion pab1 = new Pavilion(11, 10);
 		pab1.setPortal(p1);
 		
 		Portal p2 = new Portal(0, 1, 1, 2);
 		Portal p3 = new Portal(1, 2, 3, 1);
 		Portal p4 = new Portal(2, 3, 4, 0);
 		Portal p5 = new Portal(3, 4, 2, 1);
-		Pavilion pab2 = new Pavilion(4,4);
+		Pavilion pab2 = new Pavilion(5,4);
 		LinkedList<Portal> portalesPab2 = new LinkedList<Portal>();
 		portalesPab2.add(p2);
 		portalesPab2.add(p3);
@@ -32,7 +32,7 @@ public class Ejercicio2Test {
 		Portal p7 = new Portal(2, 4, 3, 2);
 		Portal p8 = new Portal(3, 1, 4, 5);
 		Portal p9 = new Portal(4, 3, 5, 2);
-		Pavilion pab3 = new Pavilion(5,5);
+		Pavilion pab3 = new Pavilion(6,5);
 		LinkedList<Portal> portalesPab3 = new LinkedList<Portal>();
 		portalesPab3.add(p6);
 		portalesPab3.add(p7);

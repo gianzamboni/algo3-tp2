@@ -7,14 +7,62 @@ import java.util.Queue;
 public class Graph {
 	private List<Integer>[] edgesByNode;
 
-	public List<Integer>[] getNodos() {
+	public List<Integer>[] getEdgesByNode() {
 		return edgesByNode;
 	}
 
-	public void setNodos(List<Integer>[] nodos) {
-		this.edgesByNode = nodos;
+	public void setEdgesByNode(List<Integer>[] e) {
+		this.edgesByNode = e;
+	}
+	
+	public void addEdge(Integer from, Integer to)
+	{
+		edgesByNode[from].add(to);
+		edgesByNode[to].add(from);
+	}
+	
+	public List<Integer> edgesOf(Integer n)
+	{
+		return edgesByNode[n];
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if(other == null){
+			return false;
+		} 
+		else if(other == this){
+			return true;
+		} 
+		else if (!(other instanceof Graph)) {
+			return false;
+		}
+		
+		Graph otherNode = (Graph) other;
+		boolean res = edgesByNode[0].equals(otherNode.getEdgesByNode()[0]);
+		for(int i = 1; i < edgesByNode.length; i++)
+			res = res && edgesByNode[i].equals(otherNode.getEdgesByNode()[i]);
+		return res;
+		
 	}
 
+	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+	    result.append("Graph[\n");
+	    for(int i = 0; i < edgesByNode.length; i++){
+	    	result.append("\tNode = " + i + "; ");
+	    	result.append("Adjacency nodes = " + this.edgesByNode[i].toString());
+	    	result.append("\n");
+	    	
+	    }
+	    result.append("]");
+	    result.append("\n");
+
+	    return result.toString();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Graph(Integer k){
 		this.edgesByNode = (LinkedList<Integer>[]) new LinkedList[k];

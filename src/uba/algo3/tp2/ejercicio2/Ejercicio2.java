@@ -41,7 +41,7 @@ public class Ejercicio2 {
 			String[] portales  = line1.split("; ");
 			
 			//						          cantidadPisos   longitud
-			Pavilion edificio = new Pavilion(parametros[0], parametros[1]);
+			Pavilion edificio = new Pavilion(parametros[0]+1, parametros[1]);
 			
 			for (String portal : portales)
 			{

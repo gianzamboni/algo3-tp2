@@ -39,6 +39,29 @@ public class Pavilion {
 		portales = new LinkedList<Portal>();
 	}
 	
+	public Graph toGraph()
+	{
+		// Creamos un grafo con todas las baldosas posibles pero sin las conexiones
+		Graph res = new Graph(floorNumber*floorLength + portales.size()); // O(N*L + P)
+		for(int i = 1; i < floorNumber*floorLength ; i++) // lleno las posiciones conectadas caminando
+		{
+			if(i % floorLength != 0)
+			{	
+				res.addEdge(i-1, i);
+			}
+		}
+		int i = floorNumber*floorLength;
+		for(Portal portal : portales ) // lleno las posiciones conectadas por los portales. O(P)
+		{
+			Integer inicio = portal.getFloorA()*floorLength + portal.getMetersA();
+			Integer fin = portal.getFloorB()*floorLength + portal.getMetersB();
+			
+			res.addEdge(inicio, i);
+			res.addEdge(fin, i);
+			i++;
+		}
+		return res;
+	}
 	@Override
 	public String toString(){
 		StringBuilder result = new StringBuilder();
