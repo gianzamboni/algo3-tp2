@@ -80,18 +80,28 @@ public class Graph {
 		this.edgesByNode = nodos;
 	}
 	//Retorna el arreglo con todas las distacias minimas de todos los nodos empezando por el nodo 0
+	// En el peor caso es O(#nodos^2)
 	public Integer[] BFS(){
+		
 		Integer[] distancias = new Integer[edgesByNode.length]; 
 		Queue<Integer> cola = new LinkedList<Integer>(); //En la cola se guarda el index de cada nodo del grafo
+		
+		// O(#nodos)
 		for(int i =1;i<distancias.length ; i++){
 			distancias[i]=-1;
 			//Inicializamos el arreglo con un valor de distancia "Infinito" para saber cuáles fueron calculados
 		}
+		
 		distancias[0]=0;//el inicial es 0
 		cola.add(0);
+		
+		// El ciclo no pushea dos veces el mismo nodo
+		// O(#nodos)
 		while(!cola.isEmpty()){//Mientras haya vecinos sigo recorriendo
 			int nodo = cola.poll();
 			int dist = distancias[nodo] + 1;
+			
+			// O(#nodos)
 			for(Integer vecino : edgesByNode[nodo])//recorro los vecinos del nodo en el grafo
 			{
 				if(distancias[vecino] == -1){//sino calcule la distancia, la calculo y lo encolo

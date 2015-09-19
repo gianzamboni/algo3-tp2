@@ -17,6 +17,11 @@ public class Ejercicio2 {
 		return pavilions;
 	}
 
+	public Pavilion getPavilion(Integer idx)
+	{
+		return pavilions.get(idx);
+	}
+	
 	String fileName;
 	
 	public Ejercicio2(String fileName) throws IOException 
@@ -60,5 +65,10 @@ public class Ejercicio2 {
 
 	public final int solve( ) {
 		return 0;
+	}
+	
+	public Integer run(Integer idx)
+	{
+		return pavilions.get(idx).maxDistance();
 	}
 }

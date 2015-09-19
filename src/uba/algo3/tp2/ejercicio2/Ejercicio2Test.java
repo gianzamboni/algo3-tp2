@@ -45,6 +45,20 @@ public class Ejercicio2Test {
 		ciudad.add(pab2);
 		ciudad.add(pab3);
 		assertEquals(ciudad, ej.getPavilions());
+		
+		Integer j = 0;
+		for (Integer i : ej.getPavilion(0).toGraph().BFS())
+		{
+			System.out.println("Idx: " + j + " " + i);
+			j++;
+		}
+		
+		System.out.println(ej.run(0));
+		System.out.println(pab1.toGraph());
+		//assertEquals(21, ej.run(0));
+		//assertEquals(18, ej.run(1));
+		//assertEquals(17, ej.run(2));
+		
 	}
 
 }
