@@ -9,7 +9,7 @@ public class Utils {
    public static Vector parseVector( String line ) {
       Vector in = new Vector();
 
-      StringTokenizer st = new StringTokenizer( line, " " );
+      StringTokenizer st = new StringTokenizer( line);
       while ( st.hasMoreTokens() ) {
          in.add( new Integer( st.nextToken() ) );
       }
@@ -18,13 +18,13 @@ public class Utils {
    }
 
    public static Integer[] parseArray( String line ) {
-      Vector in = parseVector( line );
+      Vector in = parseVector( line);
 
       return (Integer[]) in.toArray( new Integer[ in.size() ] );
    }
 
    public static int[] parseArrayI( String line ) {
-      Vector<Integer> in = parseVector( line );
+      Vector<Integer> in = parseVector( line);
       int[] v = new int[  in.size() ];
 
       for ( int i = 0; i < v.length; i++ ) {
