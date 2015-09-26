@@ -1,12 +1,12 @@
 package uba.algo3.tp2.ejercicio3;
 
-public class Arista implements Comparable<Arista> {
+public class Edge implements Comparable<Edge> {
 
    private int _nod1;
    private int _nod2;
    private int _peso;
 
-   public Arista( int n1, int n2, int p ) {
+   public Edge( int n1, int n2, int p ) {
       this._nod1 = n1;
       this._nod2 = n2;
       this._peso = p;
@@ -24,7 +24,7 @@ public class Arista implements Comparable<Arista> {
       return _nod2;
    }
 
-   public boolean lessThan( Arista ar ) {
+   public boolean lessThan( Edge ar ) {
       if (peso() != ar.peso()) {
          return peso() < ar.peso();
       }
@@ -34,7 +34,7 @@ public class Arista implements Comparable<Arista> {
       return nodo2() < ar.nodo2();
    }
 
-   public int compareTo( Arista otherInstance ) {
+   public int compareTo( Edge otherInstance ) {
       if (lessThan( otherInstance )) {
          return -1;
       } else if (otherInstance.lessThan( this )) {

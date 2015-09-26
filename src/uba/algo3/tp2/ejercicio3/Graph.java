@@ -2,30 +2,32 @@ package uba.algo3.tp2.ejercicio3;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class Graph {
-	private List<Arista> edges;
+	private List<Edge> edges;
 
-	public List<Arista> getEdges() {
+	public List<Edge> getEdges() {
 		return edges;
 	}
 
-	public void setEdges(List<Arista> e) {
+	public void setEdges(List<Edge> e) {
 		this.edges = e;
 	}
 	
-	public void addEdge(Arista a)
+	public void addEdge(Edge a)
 	{
 		edges.add(a);
 	}
 	
-	public boolean hasEdge(Arista a)
+	public boolean hasEdge(Edge a)
 	{
 		return edges.contains(a);
 	}
 	
 	// nos importa que tengan las mismas aristas pero en el mismo orden
+	// la complejidad de la comparación sera O(M)
+	// igual para el contexto del problema jamas comparamos grafos
+	// solo en los tests.
 	@Override
 	public boolean equals(Object other){
 		if(other == null){
@@ -43,7 +45,7 @@ public class Graph {
 		if (otherGraph.getEdges().size() != edges.size())
 			return false;
 		
-		for (Arista a : edges)
+		for (Edge a : edges)
 		{
 			if (!otherGraph.hasEdge(a))
 				return false;
@@ -51,34 +53,16 @@ public class Graph {
 		
 		return true;	
 	}
-
-	
-	/*@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-	    result.append("Graph[\n");
-	    for(int i = 0; i < edgesByNode.length; i++){
-	    	result.append("\tNode = " + i + "; ");
-	    	result.append("Adjacency nodes = " + this.edgesByNode[i].toString());
-	    	result.append("\n");
-	    	
-	    }
-	    result.append("]");
-	    result.append("\n");
-
-	    return result.toString();
-	}*/
 	
 	@SuppressWarnings("unchecked")
 	public Graph(){
-		edges = new LinkedList<Arista>();
+		edges = new LinkedList<Edge>();
 	}
 
-	public Graph(List<Arista> lista){
+	public Graph(List<Edge> lista){
 		this.edges = lista;
 	}
-	
-		
+			
 	Integer kruskal()
 	{
 		return 0;
