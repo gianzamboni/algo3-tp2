@@ -1,4 +1,5 @@
-package uba.algo3.kruskal;
+package uba.algo3.tp2.tallerkruskal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 

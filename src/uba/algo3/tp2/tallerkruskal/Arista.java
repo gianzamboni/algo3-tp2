@@ -1,4 +1,4 @@
-package uba.algo3.kruskal;
+package uba.algo3.tp2.tallerkruskal;
 
 public class Arista implements Comparable<Arista> {
 
