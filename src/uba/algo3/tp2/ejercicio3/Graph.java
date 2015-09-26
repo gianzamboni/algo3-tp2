@@ -1,16 +1,19 @@
 package uba.algo3.tp2.ejercicio3;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
-	private List<Edge> edges;
+	private ArrayList<Edge> edges;
+	private Integer nodos;
 
-	public List<Edge> getEdges() {
+	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 
-	public void setEdges(List<Edge> e) {
+	public void setEdges(ArrayList<Edge> e) {
 		this.edges = e;
 	}
 	
@@ -55,16 +58,48 @@ public class Graph {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Graph(){
-		edges = new LinkedList<Edge>();
+	public Graph(Integer m, Integer nodos){
+		this.edges = new ArrayList<Edge>(m);
+		this.nodos = nodos;
 	}
 
-	public Graph(List<Edge> lista){
+	public Graph(ArrayList<Edge> lista, Integer nodos){
 		this.edges = lista;
+		this.nodos = nodos;
 	}
 			
-	Integer kruskal()
+	public Integer kruskal()
 	{
-		return 0;
+		ArrayList<Edge> E = edges;
+		List<Edge> T = new LinkedList<Edge>();
+
+		//ordeno aristas
+		Collections.sort(E, Collections.reverseOrder());
+		
+		int i = 0;
+		  
+		  int costo = 0;
+		  // crear n componentes conexas (una para cada nodo)
+		  UnionFind componentes = new UnionFind(nodos);
+		
+		  while ( T.size() < nodos -1 )
+		  {
+		     Edge e = E.get(i);
+		     if(!componentes.isSameSet(e.nodo1(), e.nodo2())) 
+		     { // si no pertenecen a la misma componente conexa
+		    	 T.add(e); //O(1)
+		    	 componentes.unionSet(e.nodo1(), e.nodo2());
+		     } else
+		     {
+		    	 // es la componente de un ciclo, pero es la de menor peso
+		    	 // porque las aristas se agregan de mayor a menor.
+		    	 costo = costo + e.peso();
+		    	 
+		     }
+		     i++;
+		  }
+	
+		  return costo;
+
 	}
 }
