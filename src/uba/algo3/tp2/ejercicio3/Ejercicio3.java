@@ -37,7 +37,6 @@ public class Ejercicio3 {
 		String line;
 		
 		while((line = is.readLine()) != null) {
-			line = is.readLine();
 			
 			String[] pasillos  = line.split("; ");
 			
@@ -66,6 +65,6 @@ public class Ejercicio3 {
 	
 	public Integer run(Integer idx)
 	{
-		return pavilions.get(idx).toGraph().kruskal();
+		return pavilions.get(idx).sacarCiclos();
 	}
 }

@@ -1,5 +1,7 @@
 package uba.algo3.tp2.ejercicio3;
 
+import uba.algo3.tp2.ejercicio2.Portal;
+
 public class Edge implements Comparable<Edge> {
 
    private int _nod1;
@@ -43,5 +45,24 @@ public class Edge implements Comparable<Edge> {
 
       return 0;
    }
+   
+	@Override
+	public boolean equals(Object other){
+		if(other == null){
+			return false;
+		} 
+		else if(other == this){
+			return true;
+		} 
+		else if (!(other instanceof Edge)) {
+			return false;
+		}
+		
+		Edge otherNode = (Edge) other;
+		return this._nod1 == otherNode.nodo1() 
+				&& this._nod2 == otherNode.nodo2() 
+				&& this._peso == otherNode.peso();
+		
+	}
 
 }

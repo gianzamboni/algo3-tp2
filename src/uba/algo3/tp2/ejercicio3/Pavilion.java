@@ -10,6 +10,8 @@ public class Pavilion {
 	private ArrayList<Edge> aristas;
 	private Set<Integer> nodos;
 	
+	private Integer pesoTotalAristas;
+	
 	public boolean hasEdge(Edge e)
 	{
 		return aristas.contains(e);
@@ -24,6 +26,8 @@ public class Pavilion {
 		// O(log n)
 		nodos.add(e.nodo1());
 		nodos.add(e.nodo2());
+		
+		pesoTotalAristas += e.peso();
 	}
 	
 	public ArrayList<Edge> getAristas() {
@@ -48,6 +52,7 @@ public class Pavilion {
 		// nos sirve para ir contando las intersecciones.
 		nodos = new TreeSet<Integer>();
 		aristas = new ArrayList<Edge>();
+		pesoTotalAristas = 0;
 	}
 	
 	public Graph toGraph() 
@@ -56,6 +61,14 @@ public class Pavilion {
 		return grafo;
 	}
 
+	public Integer sacarCiclos()
+	{
+		Graph g = toGraph();
+		
+		Integer pesoArbol = g.kruskal();
+		
+		return pesoTotalAristas - pesoArbol;
+	}
 	@Override
 	public boolean equals(Object other){
 		if(other == null){

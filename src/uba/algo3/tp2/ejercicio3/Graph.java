@@ -7,8 +7,17 @@ import java.util.List;
 
 public class Graph {
 	private ArrayList<Edge> edges;
+
 	private Integer nodos;
 
+	public Integer getNodos() {
+		return nodos;
+	}
+
+	public void setNodos(Integer nodos) {
+		this.nodos = nodos;
+	}
+	
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
@@ -72,34 +81,29 @@ public class Graph {
 	{
 		ArrayList<Edge> E = edges;
 		List<Edge> T = new LinkedList<Edge>();
-
+		
 		//ordeno aristas
 		Collections.sort(E, Collections.reverseOrder());
 		
 		int i = 0;
 		  
-		  int costo = 0;
-		  // crear n componentes conexas (una para cada nodo)
-		  UnionFind componentes = new UnionFind(nodos);
-		
-		  while ( T.size() < nodos -1 )
-		  {
-		     Edge e = E.get(i);
-		     if(!componentes.isSameSet(e.nodo1(), e.nodo2())) 
-		     { // si no pertenecen a la misma componente conexa
-		    	 T.add(e); //O(1)
-		    	 componentes.unionSet(e.nodo1(), e.nodo2());
-		     } else
-		     {
-		    	 // es la componente de un ciclo, pero es la de menor peso
-		    	 // porque las aristas se agregan de mayor a menor.
-		    	 costo = costo + e.peso();
-		    	 
-		     }
-		     i++;
-		  }
+		int costo = 0;
+		// crear n componentes conexas (una para cada nodo)
+		UnionFind componentes = new UnionFind(nodos);
+
+		while ( T.size() < nodos -1 )
+		{
+			Edge e = E.get(i);
+			if(!componentes.isSameSet(e.nodo1(), e.nodo2())) 
+			{ // si no pertenecen a la misma componente conexa
+				T.add(e); //O(1)
+				componentes.unionSet(e.nodo1(), e.nodo2());
+				costo = costo + e.peso();
+			} 
+			i++;
+		}
 	
-		  return costo;
+		return costo;
 
 	}
 }
