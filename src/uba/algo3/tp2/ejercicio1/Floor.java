@@ -6,13 +6,28 @@ import java.util.List;
 public class Floor {
 	
 	private Integer id;
+	// a que otros pisos puedo ir desde aqui
 	private List<Integer> adjacencyNodes;
+	// cantidad maxima de portales que puedo tomar para llegar aqui
 	private Integer maxDistanceToLowLevel;
+	// indica si el piso es alcanzanble desde el piso 0
+	private boolean reachable;
 	
 	public Floor(Integer id){
 		this.id = id;
 		this.adjacencyNodes = new LinkedList<Integer>();
 		this.maxDistanceToLowLevel = 0;
+		
+		if (id == 0)
+			this.reachable = true;
+	}
+	
+	public boolean isReachable() {
+		return reachable;
+	}
+
+	public void setReachable(boolean reachable) {
+		this.reachable = reachable;
 	}
 	
 	public Integer getId() {
@@ -23,11 +38,11 @@ public class Floor {
 		this.id = id;
 	}
 
-	public List<Integer> getAdjacencyNodes() {
+	public List<Integer> getAdjacentFloors() {
 		return adjacencyNodes;
 	}
 
-	public void setAdjacencyNodes(List<Integer> adjacencyNodes) {
+	public void setAdjacentFloors(List<Integer> adjacencyNodes) {
 		this.adjacencyNodes = adjacencyNodes;
 	}
 
@@ -39,7 +54,7 @@ public class Floor {
 		this.maxDistanceToLowLevel = maxDistanceToLowLevel;
 	}
 
-	public void addAdjacencyNode(Integer nodeId){
+	public void addAdjacentFloor(Integer nodeId){
 		this.adjacencyNodes.add(nodeId);
 	}
 	
@@ -69,7 +84,7 @@ public class Floor {
 		
 		Floor otherNode = (Floor) other;
 		return this.id.equals(otherNode.getId()) 
-				&& this.adjacencyNodes.equals(otherNode.getAdjacencyNodes()) 
+				&& this.adjacencyNodes.equals(otherNode.getAdjacentFloors()) 
 				&& this.maxDistanceToLowLevel.equals(otherNode.getMaxDistanceToLowLevel()); 
 		
 	}

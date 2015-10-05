@@ -29,20 +29,33 @@ public class Pavilion {
 	public Pavilion(Integer floors, String line) {
 		this.floorNumber = floors;
 		this.floors = new Floor[floors+1];
+		
+		for (Integer i = 0; i < floors+1; i++)
+			this.floors[i] = new Floor(i);
+		
 		LineParser.parseExercise1(line, this.floors);
 	}
 
 
 	public Integer getMaxDistanceToLastFloor() {
 		
-		for(int i = 0; i <= floorNumber; i++){
-			if(floors[i] != null){
-				for(Integer nodeId : floors[i].getAdjacencyNodes()){
-					Integer distance = floors[i].getMaxDistanceToLowLevel() + 1;
-					if(distance > floors[nodeId].getMaxDistanceToLowLevel()) {
-						floors[nodeId].setMaxDistanceToLowLevel(distance);
+		// recorremos cada piso del edificio
+		for(Floor floor : floors){
+			
+			// Si el piso es alcanzable desde el 0
+			if (floor.isReachable()){
+				// Recorremos sus pisos adyacentes (superiores)
+				for(Integer nextFloor : floor.getAdjacentFloors()){
+					// la distancia desde aqui al siguiente, es moverse + 1
+					Integer distance = floor.getMaxDistanceToLowLevel() + 1;
+					// si mejoro la distancia la seteo.
+					if(distance > floors[nextFloor].getMaxDistanceToLowLevel()) {
+						floors[nextFloor].setMaxDistanceToLowLevel(distance);
 					}
-				}	
+					
+					// marco el piso como alcanzable desde 0.
+					floors[nextFloor].setReachable(true);
+				}
 			}
 		}
 		

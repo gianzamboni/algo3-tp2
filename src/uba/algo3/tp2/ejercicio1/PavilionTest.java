@@ -19,7 +19,7 @@ public class PavilionTest {
 		
 		Floor[] expectedNodesArray = new Floor[11];
 		expectedNodesArray[0] = new Floor(0);
-		expectedNodesArray[0].addAdjacencyNode(10);
+		expectedNodesArray[0].addAdjacentFloor(10);
 		expectedNodesArray[10] = new Floor(10);
 		
 		
@@ -38,12 +38,12 @@ public class PavilionTest {
 		
 		Floor[] expectedNodesArray = new Floor[10];
 		expectedNodesArray[0] = new Floor(0);
-		expectedNodesArray[0].addAdjacencyNode(5);
+		expectedNodesArray[0].addAdjacentFloor(5);
 		expectedNodesArray[1] = new Floor(1);
-		expectedNodesArray[1].addAdjacencyNode(6);
-		expectedNodesArray[1].addAdjacencyNode(7);
+		expectedNodesArray[1].addAdjacentFloor(6);
+		expectedNodesArray[1].addAdjacentFloor(7);
 		expectedNodesArray[5] = new Floor(5);
-		expectedNodesArray[5].addAdjacencyNode(9);
+		expectedNodesArray[5].addAdjacentFloor(9);
 		expectedNodesArray[6] = new Floor(6);
 		expectedNodesArray[7] = new Floor(7);
 		expectedNodesArray[9] = new Floor(9);

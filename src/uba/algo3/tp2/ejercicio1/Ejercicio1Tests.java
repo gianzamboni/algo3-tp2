@@ -32,7 +32,6 @@ public class Ejercicio1Tests {
 
 		BufferedReader is = new BufferedReader( new InputStreamReader( getClass().getResourceAsStream( ej.getFileName() + ".out") ) );
 	    String line;
-	    
 
 	    line = is.readLine();
 	    assertEquals("1", line);
