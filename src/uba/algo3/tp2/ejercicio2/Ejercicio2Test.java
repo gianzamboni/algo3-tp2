@@ -7,8 +7,70 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
+import uba.algo3.tp2.ejercicio1.Ejercicio1;
+
 public class Ejercicio2Test {
 
+	void runCorridas(Integer testIdx, Integer iterations, Ejercicio2 ej)
+ 	{	
+ 		for (int i = 0; i < iterations; i++)
+ 			ej.run(testIdx);
+ 	}
+	
+	
+	@Test
+	public void testPeorCaso() throws IOException {
+		//System.out.println("Memoria: " + java.lang.Runtime.getRuntime().maxMemory());
+		Ejercicio2 ej = new Ejercicio2("Tp2Ej2PeorCaso");
+		
+		System.out.println("Imprimiendo caracteristicas:");
+		for (Pavilion p : ej.getPavilions())
+		{
+			System.out.println("N: " + (p.getFloorNumber()-1));
+			System.out.println("L: " + (p.getFloorLength()));
+			System.out.println("P: " + (p.getPortales().size()));
+		}
+		
+		Integer maxSize = 500;
+		Integer initialSize = 100;
+		Integer step = 50;
+		Integer iterations = 1000;
+		Integer instanceId = 0;
+		
+		System.out.println("Peor caso");
+		
+		long time = 0;
+		for (Integer n = initialSize; n <= maxSize; n = n + step)
+		{
+			runCorridas(instanceId, iterations, ej);
+			
+			time = System.currentTimeMillis();
+			
+			runCorridas(instanceId, iterations, ej);
+			
+			Double delta = ((System.currentTimeMillis() - time) / iterations.doubleValue());
+			
+			Integer L = ej.getPavilion(instanceId).getFloorLength();
+			Integer N = ej.getPavilion(instanceId).getFloorNumber()-1;
+			Integer P = ej.getPavilion(instanceId).getPortales().size();
+			
+			// asi es mas facil graficar ya en matlab.
+			Integer complexity = N*L + P;
+			
+			Double con = (delta).doubleValue()/ complexity;
+			
+			System.out.println(n + "," + delta + "," + complexity +  "," + con);
+			
+			ej.getPavilions().remove(instanceId);
+			// sugerimos correr el garbage collector para borrarlo asi no interfiere 
+			// en la proxima medición
+			//System.gc();
+			
+			instanceId = instanceId + 1;
+		}
+		
+	}
+	
 	@Test
 	public void test() throws IOException {
 		Ejercicio2 ej = new Ejercicio2("Tp2Ej2");

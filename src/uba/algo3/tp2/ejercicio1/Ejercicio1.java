@@ -34,6 +34,7 @@ public class Ejercicio1 {
 		this.fileName = fileName;
 		this.pavilions = new LinkedList<Pavilion>();
 		
+		System.out.println("Estoy levantando archivos.");
 		BufferedReader is = new BufferedReader( new InputStreamReader( getClass().getResourceAsStream( fileName + ".in") ) );
 		
 		String line;
@@ -45,6 +46,7 @@ public class Ejercicio1 {
 			pavilions.add(pavilion);
 		}
 		
+		System.out.println("Termine.");
 		is.close();
 	};
 

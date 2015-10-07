@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class Ejercicio1Tests {
 	
 	private long time;
@@ -24,6 +25,12 @@ public class Ejercicio1Tests {
 		System.out.println( System.currentTimeMillis() - time );
 	}
 	
+ 	void runCorridas(Integer testIdx, Integer iterations, Ejercicio1 ej)
+ 	{	
+ 		for (int i = 0; i < iterations; i++)
+ 			ej.run(testIdx);
+ 	}
+ 	
 	@Test
 	public void testCatedra() throws IOException {
 		
@@ -41,4 +48,88 @@ public class Ejercicio1Tests {
 	    is.close();
 	    
 	}
+	
+	
+	@Test
+	public void testPeorCaso() throws IOException {
+		Ejercicio1 ej = new Ejercicio1("Tp2Ej1PeorCaso");
+		
+		Integer maxSize = 2000;
+		Integer initialSize = 100;
+		Integer step = 100;
+		
+		Integer instanceId = 0;
+		
+		System.out.println("Peor caso");
+		
+		long time = 0;
+		for (Integer n = initialSize; n <= maxSize; n = n + step)
+		{
+			time = System.currentTimeMillis();
+			
+			runCorridas(instanceId, 2000, ej);
+			
+			Double delta = ((System.currentTimeMillis() - time) / 2000.0);
+			
+			System.out.println(n + "," + delta);
+			
+			instanceId = instanceId + 1;
+		}
+	}
+	
+	@Test
+	public void testMejorCaso() throws IOException {
+		Ejercicio1 ej = new Ejercicio1("Tp2Ej1MejorCaso");
+		
+		Integer maxSize = 2000;
+		Integer initialSize = 100;
+		Integer step = 100;
+		
+		Integer instanceId = 0;
+		
+		System.out.println("Mejor caso");
+		
+		long time = 0;
+		for (Integer n = initialSize; n <= maxSize; n = n + step)
+		{
+			time = System.currentTimeMillis();
+			
+			runCorridas(instanceId, 2000, ej);
+			
+			Double delta = ((System.currentTimeMillis() - time) / 2000.0);
+			
+			System.out.println(n + "," + delta);
+			
+			instanceId = instanceId + 1;
+		}
+	}
+	
+	@Test
+	public void testSinIntencionalidad() throws IOException {
+		Ejercicio1 ej = new Ejercicio1("Tp2Ej1SinIntencionalidad");
+		
+		Integer maxSize = 2000;
+		Integer initialSize = 100;
+		Integer step = 100;
+		
+		Integer instanceId = 0;
+		
+		System.out.println("Sin Intencionalidad");
+		
+		long time = 0;
+		for (Integer n = initialSize; n <= maxSize; n = n + step)
+		{
+			time = System.currentTimeMillis();
+			
+			runCorridas(instanceId, 2000, ej);
+			
+			Double delta = ((System.currentTimeMillis() - time) / 2000.0);
+			
+			System.out.println(n + "," + delta);
+			
+			instanceId = instanceId + 1;
+		}
+	}
+	
+	
 }

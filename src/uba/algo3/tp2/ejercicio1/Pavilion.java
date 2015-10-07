@@ -39,9 +39,15 @@ public class Pavilion {
 
 	public Integer getMaxDistanceToLastFloor() {
 		
+		// Cada floor tiene una lista
+		// Copiar esas listas termina siendo de orden cuadratico.
+		// asi podemos correr varias veces el metodo.
+		//Floor[] _floors = new Floor[this.floors.length];
+ 		//System.arraycopy(this.floors, 0, _floors, 0, this.floors.length);
+ 		
+		
 		// recorremos cada piso del edificio
 		for(Floor floor : floors){
-			
 			// Si el piso es alcanzable desde el 0
 			if (floor.isReachable()){
 				// Recorremos sus pisos adyacentes (superiores)
@@ -59,7 +65,19 @@ public class Pavilion {
 			}
 		}
 		
-		return floors[floorNumber].getMaxDistanceToLowLevel();
+		
+		Integer res = floors[floorNumber].getMaxDistanceToLowLevel();
+		
+		
+		// reseteamos los valores para poder ejecutarlo varias veces seguidas.
+		// O(N)
+		for(Floor floor : floors){
+			floor.setReachable(false);
+			floor.setMaxDistanceToLowLevel(0);
+		}
+		
+		floors[0].setReachable(true);
+		return res;
 		
 	}
 
