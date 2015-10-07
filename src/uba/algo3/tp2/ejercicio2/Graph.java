@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class Graph {
 	private List<Integer>[] edgesByNode;
-
+	
 	public List<Integer>[] getEdgesByNode() {
 		return edgesByNode;
 	}

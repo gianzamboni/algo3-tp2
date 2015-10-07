@@ -8,6 +8,24 @@ public class Pavilion {
 	private Integer floorNumber;
 	private List<Portal> portales;
 	
+	private Graph graph;
+	private Integer portalNumber;
+	
+	
+	public Integer getPortalNumber() {
+		return portalNumber;
+	}
+	public void setPortalNumber(Integer portalNumber) {
+		this.portalNumber = portalNumber;
+	}
+	
+	public Graph getGraph() {
+		return graph;
+	}
+	public void setGraph(Graph graph) {
+		this.graph = graph;
+	}
+	
 	public Integer getFloorLength() {
 		return floorLength;
 	}
@@ -29,6 +47,7 @@ public class Pavilion {
 
 	public void setPortal(Portal p)
 	{
+		portalNumber++;
 		this.portales.add(p);
 	}
 	
@@ -37,31 +56,17 @@ public class Pavilion {
 		setFloorLength(length);
 		setFloorNumber(floors);
 		portales = new LinkedList<Portal>();
+		portalNumber = 0;
 	}
 	
 	public Integer maxDistance()
 	{
-		
-		Graph grafo = toGraph();
-		
-		// Debemos justificar porque no entramos en el peor caso del algoritmo.
-		// Peor caso del algoritmo (independientemente de que tipo de grafo sea): O(#nodos^2)
-		// No todos los vertices de NUESTRO grafo tiene conexión a todos los demas vertices.
-		// Nuestro grafo tiene el orden de O(N*L + P) nodos.
-		// Solamente N*L vertices pueden tener el orden de O(N*L) aristas
-		// En cambio los vertices de portales tienen 2 aristas siempre
-		// En el peor caso de nuestro grafo es P = (N*L)^2. Es decir cada nodo tiene un portal a todos los demas nodos.
-		// El orden de cantidad de nodos es O(N*L + (N*L)^2)
-		// Los primeros N*L pops tendran (N*L) vecinos -> O((N*L)^2) operaciones
-		// Los siguientes (N*L)^2 dos aristas. -> O((N*L)^2) operaciones
-		// Entonces la cantidad de operaciones sigue siendo igual a la cantidad de vertices del grafo.
-		
-		Integer[] distances = grafo.BFS();
+		Integer[] distances = this.graph.BFS();
 		
 		return distances[floorNumber*(floorLength+1)-1];
 	}
 	
-	public Graph toGraph() // O(N*L + P)
+	public void toGraph() // O(N*L + P)
 	{
 		// Creamos un grafo con todas las baldosas posibles pero sin las conexiones
 		Graph res = new Graph(floorNumber*(floorLength + 1) + portales.size()); // O(N*L + P)
@@ -82,8 +87,13 @@ public class Pavilion {
 			res.addEdge(fin, i);
 			i++;
 		}
-		return res;
+		
+		portales.clear();
+		
+		this.graph = res;
+		//return res;
 	}
+	
 	@Override
 	public String toString(){
 		StringBuilder result = new StringBuilder();

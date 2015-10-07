@@ -11,30 +11,30 @@ import uba.algo3.tp2.ejercicio1.Ejercicio1;
 
 public class Ejercicio2Test {
 
-	void runCorridas(Integer testIdx, Integer iterations, Ejercicio2 ej)
+	void runCorridas(Integer testIdx, Integer iterations, Pavilion p)
  	{	
  		for (int i = 0; i < iterations; i++)
- 			ej.run(testIdx);
+ 			p.maxDistance();
  	}
 	
 	
-	@Test
+	@Test 
 	public void testPeorCaso() throws IOException {
-		//System.out.println("Memoria: " + java.lang.Runtime.getRuntime().maxMemory());
+		System.out.println("Memoria: " + java.lang.Runtime.getRuntime().maxMemory());
 		Ejercicio2 ej = new Ejercicio2("Tp2Ej2PeorCaso");
 		
-		System.out.println("Imprimiendo caracteristicas:");
+		/*System.out.println("Imprimiendo caracteristicas:");
 		for (Pavilion p : ej.getPavilions())
 		{
 			System.out.println("N: " + (p.getFloorNumber()-1));
 			System.out.println("L: " + (p.getFloorLength()));
 			System.out.println("P: " + (p.getPortales().size()));
-		}
+		}*/
 		
 		Integer maxSize = 500;
 		Integer initialSize = 100;
 		Integer step = 50;
-		Integer iterations = 1000;
+		Integer iterations = 400;
 		Integer instanceId = 0;
 		
 		System.out.println("Peor caso");
@@ -42,17 +42,26 @@ public class Ejercicio2Test {
 		long time = 0;
 		for (Integer n = initialSize; n <= maxSize; n = n + step)
 		{
-			runCorridas(instanceId, iterations, ej);
+			// contiene lista de aristas del input.
+			Pavilion pabellon = ej.nextPavilion();
+			// Crear el grafo directamente del input es un poco problematico por no saber la cantidad portales total.
+			// Se podría acotar pero tampoco es una buena solución.
+			// toGraph cumple con la complejidad del ejercicio, pero al involucrar muchos pedidos de memoria
+			// es dificil medir el tiempo de ejecución con nuestro modelo de complejidad.
+			
+			pabellon.toGraph(); // creamos grafo en O(N*L+P) 
+			//System.gc();
+			runCorridas(instanceId, iterations, pabellon);
 			
 			time = System.currentTimeMillis();
 			
-			runCorridas(instanceId, iterations, ej);
+			runCorridas(instanceId, iterations, pabellon);
 			
 			Double delta = ((System.currentTimeMillis() - time) / iterations.doubleValue());
 			
-			Integer L = ej.getPavilion(instanceId).getFloorLength();
-			Integer N = ej.getPavilion(instanceId).getFloorNumber()-1;
-			Integer P = ej.getPavilion(instanceId).getPortales().size();
+			Integer L = pabellon.getFloorLength();
+			Integer N = pabellon.getFloorNumber()-1;
+			Integer P = pabellon.getPortalNumber();
 			
 			// asi es mas facil graficar ya en matlab.
 			Integer complexity = N*L + P;
@@ -61,7 +70,6 @@ public class Ejercicio2Test {
 			
 			System.out.println(n + "," + delta + "," + complexity +  "," + con);
 			
-			ej.getPavilions().remove(instanceId);
 			// sugerimos correr el garbage collector para borrarlo asi no interfiere 
 			// en la proxima medición
 			//System.gc();
@@ -69,6 +77,7 @@ public class Ejercicio2Test {
 			instanceId = instanceId + 1;
 		}
 		
+		ej.closeFile();
 	}
 	
 	@Test
@@ -110,12 +119,12 @@ public class Ejercicio2Test {
 		
 	}
 
-	@Test
+	/*@Test
 	public void testCatedra() throws IOException {
 
 		Ejercicio2 ej = new Ejercicio2("Tp2Ej2");
 		assertEquals((Integer)21, ej.run(0));
 		assertEquals((Integer)18, ej.run(1));
 		assertEquals((Integer)17, ej.run(2));
-	}
+	}*/
 }
