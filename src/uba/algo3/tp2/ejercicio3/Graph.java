@@ -83,13 +83,13 @@ public class Graph {
 		List<Edge> T = new LinkedList<Edge>();
 		
 		//ordeno aristas
-		Collections.sort(E, Collections.reverseOrder());
+		Collections.sort(E, Collections.reverseOrder()); //O(MlogM)
 		
 		int i = 0;
 		  
 		int costo = 0;
 		// crear n componentes conexas (una para cada nodo)
-		UnionFind componentes = new UnionFind(nodos);
+		UnionFind componentes = new UnionFind(nodos); //O(nodos)
 
 		while ( T.size() < nodos -1 )
 		{

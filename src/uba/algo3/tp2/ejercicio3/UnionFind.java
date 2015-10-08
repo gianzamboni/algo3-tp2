@@ -14,8 +14,8 @@ public class UnionFind {
       // Cada nodo es su propio padre el principio.
 	   
 	   
-	  for (Integer i = 0; i < n; i++){
-		  _parent.add(i, i);
+	  for (Integer i = 0; i < n; i++){ //O(n)
+		  _parent.add(i, i); //add es amortizado, asi que agregar n elementos cuesta O(n)
 		  _rank.add(i,0);
 	  }
 	  

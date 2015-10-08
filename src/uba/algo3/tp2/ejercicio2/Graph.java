@@ -79,7 +79,7 @@ public class Graph {
 	public Graph(List<Integer>[] nodos) {
 		this.edgesByNode = nodos;
 	}
-	//Retorna el arreglo con todas las distacias minimas de todos los nodos empezando por el nodo 0
+	// Retorna el arreglo con todas las distacias minimas de todos los nodos empezando por el nodo 0
 	// En el peor caso es O(#nodos^2)
 	public Integer[] BFS(){
 		
