@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
@@ -88,6 +89,42 @@ public class Ejercicio3Test {
 		os.close();
 	}
 	
+	@Test 
+	public void testCreandoCasoPromedio() throws IOException {
+		Random rand = new Random();
+		BufferedWriter os = new BufferedWriter( new FileWriter( getClass().getResource( "" ).getPath() + "Tp2Ej3CasoPromedio.in") );
+		for(Integer M = 1000; M <= 30000; M +=1000)
+		{
+
+		int actual = 0; // numero del vertice que agregue por ultima vez. Actual + 1 corresponde a la cantidad de vertices
+		int anterior = 0;
+		int aristas = 0;
+
+		
+		while(aristas != M)
+		{
+			if( aristas == (actual+1)*(actual)/2) // si el grafo hasta el momento es completo
+			{
+				actual++; // agrego un nuevo vertice
+				anterior = 0; // reseteo el anterior
+			}
+			else
+			{
+				
+				os.append(anterior + " " + actual + " " + rand.nextInt(M) );
+				
+				if(aristas != M-1) // si agregue la ultima arista, no imprimo el ;
+					os.append("; ");
+				aristas++;
+				anterior++;
+				
+			}
+		}
+		os.newLine();
+		}
+		os.close();
+		
+	}
 	private long time;
 	
 	@Before
@@ -163,6 +200,37 @@ public class Ejercicio3Test {
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
 			System.out.println(n + ","  + delta + "," + complejidad);
+			instanceId = instanceId + 1;
+		}
+		
+		
+	}
+	
+	@Test 
+	public void testCasoPromedio() throws IOException {
+		Ejercicio3 ej = new Ejercicio3("Tp2Ej3CasoPromedio");
+		
+		Integer maxSize = 30000;
+		Integer initialSize = 1000;
+		Integer step = 1000;
+		Integer instanceId = 0;
+		
+		System.out.println("Caso Promedio");
+		
+		
+		long time = 0;
+		for (Integer n = initialSize; n <= maxSize; n = n + step)
+		{
+			time = System.currentTimeMillis();
+			
+			runCorridas(instanceId, 2000, ej);
+			
+			Double delta = ((System.currentTimeMillis() - time) / 2000.0);
+			
+			//System.out.println(n + "," + delta);
+			double complejidad = delta / n * Math.log(n); 
+			System.out.println(n + "," + complejidad);
+			
 			instanceId = instanceId + 1;
 		}
 		
