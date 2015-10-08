@@ -131,7 +131,7 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
-			System.out.println(n + "," + complejidad);
+			System.out.println(n + ","  + delta + "," + complejidad);
 			
 			instanceId = instanceId + 1;
 		}
@@ -162,7 +162,7 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
-			System.out.println(n + "," + complejidad);
+			System.out.println(n + ","  + delta + "," + complejidad);
 			instanceId = instanceId + 1;
 		}
 		
