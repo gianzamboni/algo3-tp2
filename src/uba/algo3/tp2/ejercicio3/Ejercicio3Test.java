@@ -11,10 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import uba.algo3.tp2.ejercicio1.Ejercicio1;
-import uba.algo3.tp2.ejercicio2.Ejercicio2;
-import uba.algo3.tp2.ejercicio2.Pavilion;
-
 public class Ejercicio3Test {
 
 	@Test 
@@ -141,7 +137,8 @@ public class Ejercicio3Test {
 	{	
 		for (int i = 0; i < iterations; i++)
 		{
-			int res = ej.run(testIdx);
+			
+			ej.run(testIdx);	
 		}
 	}
 	
@@ -202,8 +199,6 @@ public class Ejercicio3Test {
 			System.out.println(n + ","  + delta + "," + complejidad);
 			instanceId = instanceId + 1;
 		}
-		
-		
 	}
 	
 	@Test 
@@ -229,7 +224,7 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
-			System.out.println(n + "," + complejidad);
+			System.out.println(n + "," + delta + "," + complejidad);
 			
 			instanceId = instanceId + 1;
 		}

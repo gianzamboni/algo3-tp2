@@ -31,6 +31,26 @@ public class Ejercicio1Tests {
  			ej.run(testIdx);
  	}
  	
+ 	@Test
+ 	public void testVerificacion() throws IOException {
+		Ejercicio1 ej = new Ejercicio1("Tp2Ej1Verificacion");
+		ej.solve();
+
+		BufferedReader is = new BufferedReader( new InputStreamReader( getClass().getResourceAsStream( ej.getFileName() + ".out") ) );
+	    String line;
+
+	    line = is.readLine();
+	    assertEquals("2", line);
+	    line = is.readLine();
+	    assertEquals("4", line);
+	    line = is.readLine();
+	    assertEquals("3", line);
+	    line = is.readLine();
+	    assertEquals("1", line);
+	    is.close();	    
+ 	}
+ 	
+ 	
 	@Test
 	public void testCatedra() throws IOException {
 		
