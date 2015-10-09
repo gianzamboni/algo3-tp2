@@ -73,10 +73,11 @@ public class Graph {
 	}
 
 	public Graph(ArrayList<Edge> lista, Integer nodos){
+		this.edges = lista;
 		//El grafo se vuelve totalmente independiente del pabelló
-		this.edges = new ArrayList<Edge>(lista.size());
-		for (Integer i = 0; i < lista.size(); i++)
-			edges.add(new Edge(lista.get(i).nodo1(),lista.get(i).nodo2(), lista.get(i).peso()));
+		//this.edges = new ArrayList<Edge>(lista.size());
+		//for (Integer i = 0; i < lista.size(); i++)
+		//	edges.add(new Edge(lista.get(i).nodo1(),lista.get(i).nodo2(), lista.get(i).peso()));
 
 		this.nodos = nodos;
 	}

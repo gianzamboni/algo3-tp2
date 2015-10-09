@@ -1,4 +1,5 @@
 package uba.algo3.tp2.ejercicio2;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,24 +9,7 @@ public class Pavilion {
 	private Integer floorNumber;
 	private List<Portal> portales;
 	
-	private Graph graph;
-	private Integer portalNumber;
-	
-	
-	public Integer getPortalNumber() {
-		return portalNumber;
-	}
-	public void setPortalNumber(Integer portalNumber) {
-		this.portalNumber = portalNumber;
-	}
-	
-	public Graph getGraph() {
-		return graph;
-	}
-	public void setGraph(Graph graph) {
-		this.graph = graph;
-	}
-	
+
 	public Integer getFloorLength() {
 		return floorLength;
 	}
@@ -47,7 +31,6 @@ public class Pavilion {
 
 	public void setPortal(Portal p)
 	{
-		portalNumber++;
 		this.portales.add(p);
 	}
 	
@@ -56,17 +39,16 @@ public class Pavilion {
 		setFloorLength(length);
 		setFloorNumber(floors);
 		portales = new LinkedList<Portal>();
-		portalNumber = 0;
 	}
 	
 	public Integer maxDistance()
 	{
-		Integer[] distances = this.graph.BFS();
+		ArrayList<Integer> distances = toGraph().BFS();
 		
-		return distances[floorNumber*(floorLength+1)-1];
+		return distances.get(floorNumber*(floorLength+1)-1);
 	}
 	
-	public void toGraph() // O(N*L + P)
+	public Graph toGraph() // O(N*L + P)
 	{
 		// Creamos un grafo con todas las baldosas posibles pero sin las conexiones
 		Graph res = new Graph(floorNumber*(floorLength + 1) + portales.size()); // O(N*L + P)
@@ -87,11 +69,9 @@ public class Pavilion {
 			res.addEdge(fin, i);
 			i++;
 		}
-		
-		portales.clear();
-		
-		this.graph = res;
-		//return res;
+				
+		return res;
+
 	}
 	
 	@Override

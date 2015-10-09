@@ -29,6 +29,7 @@ public class Ejercicio2 {
 	{
 		archivo.close();
 	}
+	
 	String fileName;
 	
 	public Pavilion nextPavilion() throws IOException

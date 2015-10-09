@@ -1,32 +1,35 @@
 package uba.algo3.tp2.ejercicio2;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class Graph {
-	private List<Integer>[] edgesByNode;
+	//private List<Integer>[] edgesByNode;
+	private ArrayList<List<Integer>> edgesByNode;
 	
-	public List<Integer>[] getEdgesByNode() {
+	public ArrayList<List<Integer>> getEdgesByNode() {
 		return edgesByNode;
+
 	}
 
-	public void setEdgesByNode(List<Integer>[] e) {
+	public void setEdgesByNode(ArrayList<List<Integer>> e) {
 		this.edgesByNode = e;
 	}
 	
 	public void addEdge(Integer from, Integer to)
 	{
-		edgesByNode[from].add(to);
-		edgesByNode[to].add(from);
+		edgesOf(from).add(to);
+		edgesOf(to).add(from);
 	}
 	
 	public List<Integer> edgesOf(Integer n)
 	{
-		return edgesByNode[n];
+		return edgesByNode.get(n);
 	}
 	
-	@Override
+	/*@Override
 	public boolean equals(Object other){
 		if(other == null){
 			return false;
@@ -44,10 +47,10 @@ public class Graph {
 			res = res && edgesByNode[i].equals(otherNode.getEdgesByNode()[i]);
 		return res;
 		
-	}
+	}*/
 
 	
-	@Override
+	/*@Override
 	public String toString(){
 		StringBuilder result = new StringBuilder();
 	    result.append("Graph[\n");
@@ -61,52 +64,53 @@ public class Graph {
 	    result.append("\n");
 
 	    return result.toString();
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	public Graph(Integer k){
-		this.edgesByNode = (LinkedList<Integer>[]) new LinkedList[k];
+		this.edgesByNode = new ArrayList<List<Integer>>(k);
 		for(int i = 0; i < k; i++){
-			this.edgesByNode[i] = new LinkedList<Integer>();
+			this.edgesByNode.add(i, new LinkedList<Integer>());
 		}
 		
 	}
 
-	public Graph(LinkedList<Integer>[] lista){
+	public Graph(ArrayList<List<Integer>> lista){
 		this.edgesByNode = lista;
 	}
 	
-	public Graph(List<Integer>[] nodos) {
-		this.edgesByNode = nodos;
-	}
+	//public Graph(List<Integer>[] nodos) {
+	//	this.edgesByNode = nodos;
+	//}
+	
 	// Retorna el arreglo con todas las distacias minimas de todos los nodos empezando por el nodo 0
-	// En el peor caso es O(#nodos^2)
-	public Integer[] BFS(){
+	public ArrayList<Integer> BFS(){
 		
-		Integer[] distancias = new Integer[edgesByNode.length]; 
+		ArrayList<Integer> distancias = new ArrayList<Integer>(edgesByNode.size());
+
 		Queue<Integer> cola = new LinkedList<Integer>(); //En la cola se guarda el index de cada nodo del grafo
 		
 		// O(#nodos)
-		for(int i =1;i<distancias.length ; i++){
-			distancias[i]=-1;
+		for(int i =0;i< edgesByNode.size() ; i++){
+			distancias.add(i,-1);
 			//Inicializamos el arreglo con un valor de distancia "Infinito" para saber cuáles fueron calculados
 		}
 		
-		distancias[0]=0;//el inicial es 0
+		distancias.set(0, 0);//el inicial es 0
 		cola.add(0);
 		
 		// El ciclo no pushea dos veces el mismo nodo
 		// O(#nodos)
 		while(!cola.isEmpty()){//Mientras haya vecinos sigo recorriendo
 			int nodo = cola.poll();
-			int dist = distancias[nodo] + 1;
+			int dist = distancias.get(nodo) + 1;
 			
 			// O(#nodos)
-			for(Integer vecino : edgesByNode[nodo])//recorro los vecinos del nodo en el grafo
+			for(Integer vecino : edgesOf(nodo))//recorro los vecinos del nodo en el grafo
 			{
-				if(distancias[vecino] == -1){//sino calcule la distancia, la calculo y lo encolo
+				if(distancias.get(vecino) == -1){//sino calcule la distancia, la calculo y lo encolo
 					cola.add(vecino);
-					distancias[vecino]=dist;
+					distancias.set(vecino, dist);
 				}
 			}
 		}
