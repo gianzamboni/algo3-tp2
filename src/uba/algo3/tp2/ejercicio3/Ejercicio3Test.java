@@ -14,6 +14,43 @@ import org.junit.Test;
 public class Ejercicio3Test {
 
 	@Test 
+	public void testCreandoVerificacion() throws IOException {
+		BufferedWriter os = new BufferedWriter( new FileWriter( getClass().getResource( "" ).getPath() + "Tp2Ej3Verificacion.in") );
+		// Creo casos de grafos k3 concatenados
+		for(Integer M = 30 ; M<=1500 ; M +=30) //50 casos
+		{
+			//conecto el 0 con el 1 con peso M
+			os.append(0 + " " + 1 + " " + M + "; " );
+			for(int nodo = 1; nodo < (M*2)/3 - 1; nodo++)
+			{
+				
+				if(nodo % 2 == 0 ) //formo el ciclo
+				{	
+					os.append((nodo - 2) + " " + nodo + " " + M + "; ");
+					os.append(nodo + " " + (nodo + 1) + " " + M + "; ");
+				}
+				else
+					os.append(nodo + " " + (nodo + 1) + " " + 1 + "; ");
+			}
+			os.append((M*2/3 -1) + " " + (M*2/3) + " " + 1);
+			os.newLine();
+		}
+		// Creo casos de arboles
+		for(Integer M = 30 ; M<=1500 ; M +=30) //50 casos
+		{
+			for(int nodo = 0; nodo < M-1; nodo++)
+			{
+				os.append(nodo + " " + (nodo + 1) + " " + M + "; ");
+			}
+			os.append((M-1) + " " + M + " " + M);
+			os.newLine();
+		}
+		
+		os.close();
+		
+	}
+	
+	@Test 
 	public void testCreandoMejorCaso() throws IOException {
 		BufferedWriter os = new BufferedWriter( new FileWriter( getClass().getResource( "" ).getPath() + "Tp2Ej3MejorCaso.in") );
 		for(Integer M = 1000; M <= 30000; M +=1000)
@@ -137,6 +174,7 @@ public class Ejercicio3Test {
 	{	
 		for (int i = 0; i < iterations; i++)
 		{
+			ej.run(testIdx);
 			
 			ej.run(testIdx);	
 		}
@@ -165,6 +203,7 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
+			System.out.println(n + " , " + delta + " , " + complejidad);
 			System.out.println(n + ","  + delta + "," + complejidad);
 			
 			instanceId = instanceId + 1;
@@ -172,6 +211,7 @@ public class Ejercicio3Test {
 		
 		
 	}
+	
 	
 	@Test 
 	public void testPeorCaso() throws IOException {
@@ -196,6 +236,7 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
+			System.out.println(n + " , " + delta + " , " + complejidad);
 			System.out.println(n + ","  + delta + "," + complejidad);
 			instanceId = instanceId + 1;
 		}
@@ -224,12 +265,33 @@ public class Ejercicio3Test {
 			
 			//System.out.println(n + "," + delta);
 			double complejidad = delta / n * Math.log(n); 
+			System.out.println(n + " , " + delta + " , " + complejidad);
 			System.out.println(n + "," + delta + "," + complejidad);
 			
 			instanceId = instanceId + 1;
 		}
 		
 		
+	}
+	
+
+	@Test 
+	public void testVerificacion() throws IOException {
+		Ejercicio3 ej = new Ejercicio3("Tp2Ej3Verificacion");
+		
+		System.out.println("Verificacion");
+		int M=30;
+		for(Integer i = 0; i < 50; i++)
+		{
+			int res = ej.run(i);
+			assertEquals(M/3 -1, res);
+			M+=30;
+		}
+		for(Integer i = 50; i < 100; i++)
+		{
+			int res = ej.run(i);
+			assertEquals(0, res);
+		}
 	}
 	
 	@Test 
