@@ -23,7 +23,7 @@ public class Ejercicio2Test {
 		Integer maxSize = 500;
 		Integer initialSize = 100;
 		Integer step = 50;
-		Integer iterations = 500;
+		Integer iterations = 400;
 		
 		System.out.println("Sin Intencionalidad");
 		
@@ -63,7 +63,7 @@ public class Ejercicio2Test {
 		Integer maxSize = 500;
 		Integer initialSize = 100;
 		Integer step = 50;
-		Integer iterations = 500;
+		Integer iterations = 400;
 		
 		System.out.println("Mejor caso");
 		
@@ -103,7 +103,7 @@ public class Ejercicio2Test {
 		Integer maxSize = 500;
 		Integer initialSize = 100;
 		Integer step = 50;
-		Integer iterations = 500;
+		Integer iterations = 400;
 		
 		System.out.println("Peor caso");
 		
